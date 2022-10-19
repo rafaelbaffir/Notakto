@@ -3,5 +3,12 @@
     <string name="btn_1" />
     <string name="btn_2" />
     <string name="btn_3" />
-    <string name="txt_winner" />
+    <string name="txt_winner">GAY</string>
+    <string name="btn_restart">RESTART</string>
+    <string name="btn_4" />
+    <string name="btn_5" />
+    <string name="btn_6" />
+    <string name="btn_7" />
+    <string name="btn_8" />
+    <string name="btn_9"/>
 </resources>
