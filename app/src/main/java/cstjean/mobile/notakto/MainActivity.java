@@ -38,10 +38,11 @@ public class MainActivity extends AppCompatActivity {
     private void jouer(Button[] notakto) {
        int joueur = 1;
        for(;;){
-           for (int i = 0; i <= 9; i++) {
+           for (int i = 1; i <= 9; i++) {
                int finalI = i;
+               int finalI1 = i;
                notakto[i].setOnClickListener(v -> {
-                   notakto[finalI].setText("X");
+                   notakto[finalI1].setText("X");
                });
            }
            txtWinner.setText("Joueur " + joueur);
