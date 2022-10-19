@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Notakto</string>
+    <string name="btn_1" />
+    <string name="btn_2" />
+    <string name="btn_3" />
+    <string name="txt_winner" />
+</resources>
