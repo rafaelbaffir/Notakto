@@ -72,8 +72,9 @@ public class MainActivity extends AppCompatActivity {
                    txtWinner.setText("Winner is Joueur " + joueur);
                }
            });
+           txtWinner.setText("Joueur " + joueur);
        }
-       txtWinner.setText("Joueur " + joueur);
+
 
        btnReStart.setOnClickListener(v -> {
            finish();
@@ -86,30 +87,7 @@ public class MainActivity extends AppCompatActivity {
        else{
            joueur.addAndGet(-1);
        }
-       if(notakto[1].getText() == "X" && notakto[2].getText() == "X" && notakto[3].getText() == "X"){
-           txtWinner.setText("Winner is Joueur " + joueur);
-       }
-       else if (notakto[4].getText() == "X" && notakto[5].getText() == "X" && notakto[6].getText() == "X"){
-           txtWinner.setText("Winner is Joueur " + joueur);
-       }
-       else if (notakto[7].getText() == "X" && notakto[8].getText() == "X" && notakto[9].getText() == "X"){
-           txtWinner.setText("Winner is Joueur " + joueur);
-       }
-       else if(notakto[1].getText() == "X" && notakto[4].getText() == "X" && notakto[7].getText() == "X"){
-           txtWinner.setText("Winner is Joueur " + joueur);
-       }
-       else if (notakto[2].getText() == "X" && notakto[5].getText() == "X" && notakto[8].getText() == "X"){
-           txtWinner.setText("Winner is Joueur " + joueur);
-       }
-       else if (notakto[3].getText() == "X" && notakto[6].getText() == "X" && notakto[9].getText() == "X"){
-           txtWinner.setText("Winner is Joueur " + joueur);
-       }
-       else if (notakto[1].getText() == "X" && notakto[5].getText() == "X" && notakto[9].getText() == "X"){
-           txtWinner.setText("Winner is Joueur " + joueur);
-       }
-       else if (notakto[3].getText() == "X" && notakto[5].getText() == "X" && notakto[7].getText() == "X"){
-           txtWinner.setText("Winner is Joueur " + joueur);
-       }
+
 
 
     }
