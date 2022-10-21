@@ -6,8 +6,10 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class MainActivity extends AppCompatActivity {
     private Button btnReStart;
@@ -31,48 +33,56 @@ public class MainActivity extends AppCompatActivity {
 
         btnReStart = findViewById(R.id.btn_restart);
         txtWinner = findViewById(R.id.txt_winner);
+
         jouer(notakto);
     }
 
     private void jouer(Button[] notakto) {
        AtomicInteger joueur = new AtomicInteger(1);
+       AtomicReference<Boolean> partieTerminé = new AtomicReference<>(false);
 
-       for (int i = 0; i <= 8; i++) {
-           int finalI = i;
-           notakto[i].setOnClickListener(v -> {
-               notakto[finalI].setText("X");
-               if (joueur.get() == 1){
-                   joueur.addAndGet(1);
-               }
-               else{
-                   joueur.addAndGet(-1);
-               }
-               if(notakto[0].getText() == "X" && notakto[1].getText() == "X" && notakto[2].getText() == "X"){
-                   txtWinner.setText("Winner is Joueur " + joueur);
-               }
-               else if (notakto[3].getText() == "X" && notakto[4].getText() == "X" && notakto[5].getText() == "X"){
-                   txtWinner.setText("Winner is Joueur " + joueur);
-               }
-               else if (notakto[6].getText() == "X" && notakto[7].getText() == "X" && notakto[8].getText() == "X"){
-                   txtWinner.setText("Winner is Joueur " + joueur);
-               }
-               else if(notakto[0].getText() == "X" && notakto[3].getText() == "X" && notakto[6].getText() == "X"){
-                   txtWinner.setText("Winner is Joueur " + joueur);
-               }
-               else if (notakto[1].getText() == "X" && notakto[4].getText() == "X" && notakto[7].getText() == "X"){
-                   txtWinner.setText("Winner is Joueur " + joueur);
-               }
-               else if (notakto[2].getText() == "X" && notakto[5].getText() == "X" && notakto[8].getText() == "X"){
-                   txtWinner.setText("Winner is Joueur " + joueur);
-               }
-               else if (notakto[0].getText() == "X" && notakto[4].getText() == "X" && notakto[8].getText() == "X"){
-                   txtWinner.setText("Winner is Joueur " + joueur);
-               }
-               else if (notakto[2].getText() == "X" && notakto[4].getText() == "X" && notakto[6].getText() == "X"){
-                   txtWinner.setText("Winner is Joueur " + joueur);
-               }
-           });
-           txtWinner.setText("Joueur " + joueur);
+        txtWinner.setText("Joueur " + joueur);
+       if(partieTerminé.get() == false) {
+           for (int i = 0; i <= 8; i++) {
+               int finalI = i;
+               notakto[i].setOnClickListener(v -> {
+                   notakto[finalI].setText("X");
+                   txtWinner.setText("Joueur " + joueur);
+
+                   Toast toast = Toast.makeText(getApplicationContext(), "Winner is Joueur" + joueur, Toast.LENGTH_SHORT);
+                   if (notakto[0].getText() == "X" && notakto[1].getText() == "X" && notakto[2].getText() == "X") {
+                       partieTerminé.set(true);
+                       toast.show();
+                   } else if (notakto[3].getText() == "X" && notakto[4].getText() == "X" && notakto[5].getText() == "X") {
+                       partieTerminé.set(true);
+                       toast.show();
+                   } else if (notakto[6].getText() == "X" && notakto[7].getText() == "X" && notakto[8].getText() == "X") {
+                       partieTerminé.set(true);
+                       toast.show();
+                   } else if (notakto[0].getText() == "X" && notakto[3].getText() == "X" && notakto[6].getText() == "X") {
+                       partieTerminé.set(true);
+                       toast.show();
+                   } else if (notakto[1].getText() == "X" && notakto[4].getText() == "X" && notakto[7].getText() == "X") {
+                       partieTerminé.set(true);
+                       toast.show();
+                   } else if (notakto[2].getText() == "X" && notakto[5].getText() == "X" && notakto[8].getText() == "X") {
+                       partieTerminé.set(true);
+                       toast.show();
+                   } else if (notakto[0].getText() == "X" && notakto[4].getText() == "X" && notakto[8].getText() == "X") {
+                       partieTerminé.set(true);
+                       toast.show();
+                   } else if (notakto[2].getText() == "X" && notakto[4].getText() == "X" && notakto[6].getText() == "X") {
+                       partieTerminé.set(true);
+                       toast.show();
+                   }
+                   if (joueur.get() == 1) {
+                       joueur.addAndGet(1);
+                   } else {
+                       joueur.addAndGet(-1);
+                   }
+               });
+
+           }
        }
 
 
