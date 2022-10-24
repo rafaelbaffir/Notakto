@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         boutons[1] = (findViewById(R.id.btn_2));
         boutons[2] = (findViewById(R.id.btn_3));
         boutons[3] = (findViewById(R.id.btn_4));
+        boutons[4] = (findViewById(R.id.btn_5));
         boutons[5] = (findViewById(R.id.btn_6));
         boutons[6] = (findViewById(R.id.btn_7));
         boutons[7] = (findViewById(R.id.btn_8));
@@ -40,12 +41,14 @@ public class MainActivity extends AppCompatActivity {
 
         txtWinner.setText("Joueur " + joueur);
        if(partieTerminé.get() == false) {
+
            for (int i = 0; i <= 8; i++) {
                int finalI = i;
                boutons[i].setOnClickListener(v -> {
+                   Notakto.joueurSuivant(joueur);
                    boutons[finalI].setText("X");
                    txtWinner.setText("Joueur " + joueur);
-                    Notakto.joueurSuivant(joueur);
+
                    //Toast toast = Toast.makeText(getApplicationContext(), "Winner is Joueur" + joueur, Toast.LENGTH_SHORT);
                });
 
