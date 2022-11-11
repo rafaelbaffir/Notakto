@@ -12,11 +12,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class MainActivity extends AppCompatActivity {
-    private Button btnReStart;
     private TextView txtWinner;
     private final Button[] boutons = new Button[9];
 
-    @SuppressLint("MissingInflatedId")
+
+    @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,15 +32,15 @@ public class MainActivity extends AppCompatActivity {
         boutons[7] = (findViewById(R.id.btn_8));
         boutons[8] = (findViewById(R.id.btn_9));
 
-        btnReStart = findViewById(R.id.btn_restart);
+        Button btnReStart = findViewById(R.id.btn_restart);
         txtWinner = findViewById(R.id.txt_winner);
 
 
        AtomicInteger joueur = new AtomicInteger(1);
-       AtomicReference<Boolean> partieTerminé = new AtomicReference<>(false);
+       AtomicReference<Boolean> partieTerminer = new AtomicReference<>(false);
 
         txtWinner.setText("Joueur " + joueur);
-       if(partieTerminé.get() == false) {
+       if(!partieTerminer.get()) {
 
            for (int i = 0; i <= 8; i++) {
                int finalI = i;
@@ -48,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
                    Notakto.joueurSuivant(joueur);
                    boutons[finalI].setText("X");
                    txtWinner.setText("Joueur " + joueur);
-
+                   Toast toast = Toast.makeText(getApplicationContext(), "Winner is Joueur" + joueur, Toast.LENGTH_SHORT);
+                   Notakto.regles(boutons, toast);
                    //Toast toast = Toast.makeText(getApplicationContext(), "Winner is Joueur" + joueur, Toast.LENGTH_SHORT);
                });
 

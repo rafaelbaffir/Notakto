@@ -1,28 +1,42 @@
 package cstjean.mobile.notakto;
 
-import static java.security.AccessController.getContext;
 
+
+import android.content.Context;
 import android.widget.Button;
 import android.widget.Toast;
+
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ *
+ */
 public class Notakto {
     public Button[] boutons;
-    AtomicReference<Boolean> partieTerminé = new AtomicReference<>(false);
-    AtomicInteger joueur = new AtomicInteger(1);
-    //Toast toast;
+    static AtomicReference<Boolean> partieTerminer;
+    AtomicInteger joueur;
+    static Toast toast;
 
-    public Notakto(Button[] boutons, AtomicReference<Boolean> partieTerminé, AtomicInteger joueur ){
+    /**
+     * Constructeur de Notakto.
+     * @param boutons liste de boutons qui servent de cases dans le jeu.
+     * @param partieTerminer boul qui determine si la partie est fini.
+     * @param joueur pour indiquer le tour des joueur.
+     */
+    public Notakto(Button[] boutons, AtomicReference<Boolean> partieTerminer, AtomicInteger joueur ){
         this.boutons = boutons;
-        this.partieTerminé = partieTerminé;
+        this.partieTerminer = partieTerminer;
         this.joueur = joueur;
-        //this.toast = toast;
+        this.toast = toast;
     }
 
 
-
+    /**
+     * Pour passé d'un joueur à l'autre.
+     * @param joueur pour indiquer le tour des joueur.
+     */
     public static void joueurSuivant(AtomicInteger joueur){
         if (joueur.get() == 1) {
             joueur.addAndGet(1);
@@ -32,38 +46,42 @@ public class Notakto {
         }
     }
 
-    public void regles(Button[] notakto){
+    /**
+     * regles qui indique si les conditions sont bonne pour qu'il y est un gagnant/perdant.
+     * @param notakto liste de boutons qui servent de cases dans le jeu.
+     */
+    public static void regles(Button[] notakto, Toast toast){
         if (notakto[0].getText() == "X" && notakto[1].getText() == "X" && notakto[2].getText() == "X") {
-            partieTerminé.set(true);
-            //toast.show();
+            partieTerminer.set(true);
+            toast.show();
         }
         else if (notakto[3].getText() == "X" && notakto[4].getText() == "X" && notakto[5].getText() == "X") {
-            partieTerminé.set(true);
-            //toast.show();
+            partieTerminer.set(true);
+            toast.show();
         }
         else if (notakto[6].getText() == "X" && notakto[7].getText() == "X" && notakto[8].getText() == "X") {
-            partieTerminé.set(true);
-            //toast.show();
+            partieTerminer.set(true);
+            toast.show();
         }
         else if (notakto[0].getText() == "X" && notakto[3].getText() == "X" && notakto[6].getText() == "X") {
-            partieTerminé.set(true);
-            //toast.show();
+            partieTerminer.set(true);
+            toast.show();
         }
         else if (notakto[1].getText() == "X" && notakto[4].getText() == "X" && notakto[7].getText() == "X") {
-            partieTerminé.set(true);
-            //toast.show();
+            partieTerminer.set(true);
+            toast.show();
         }
         else if (notakto[2].getText() == "X" && notakto[5].getText() == "X" && notakto[8].getText() == "X") {
-            partieTerminé.set(true);
-            //toast.show();
+            partieTerminer.set(true);
+            toast.show();
         }
         else if (notakto[0].getText() == "X" && notakto[4].getText() == "X" && notakto[8].getText() == "X") {
-            partieTerminé.set(true);
-            //toast.show();
+            partieTerminer.set(true);
+            toast.show();
         }
         else if (notakto[2].getText() == "X" && notakto[4].getText() == "X" && notakto[6].getText() == "X") {
-            partieTerminé.set(true);
-            //toast.show();
+            partieTerminer.set(true);
+            toast.show();
         }
     }
 }
