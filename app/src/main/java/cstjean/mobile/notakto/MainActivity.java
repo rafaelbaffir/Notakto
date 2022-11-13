@@ -10,17 +10,12 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.notaktotemp);
-
-
-
-
-
-
 
     }
 }

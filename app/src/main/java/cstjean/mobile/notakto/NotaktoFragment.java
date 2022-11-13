@@ -9,20 +9,25 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
+import java.util.Objects;
 
 public class NotaktoFragment extends Fragment {
     private TextView txtWinner;
     private Button btnReStart;
-    private final Button[] boutons = Notakto.getInstance().getBoutons();
+    private Button[] boutons = Notakto.getInstance().getBoutons();
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.notaktotemp);
     }
 
-    @SuppressLint("MissingInflatedId")
+
+    @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,17 +67,22 @@ public class NotaktoFragment extends Fragment {
             }
         }
 
-        Intent intent = getActivity().getIntent();
+        Intent intent = requireActivity().getIntent();
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK
                 | Intent.FLAG_ACTIVITY_NO_ANIMATION);
 
         btnReStart.setOnClickListener(v -> {
-            getActivity().overridePendingTransition(0, 0);
-            getActivity().finish();
+            requireActivity().overridePendingTransition(0, 0);
+            requireActivity().finish();
 
-            getActivity().overridePendingTransition(0, 0);
+            requireActivity().overridePendingTransition(0, 0);
             startActivity(intent);
         });
         return view;
+    }
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
     }
 }
