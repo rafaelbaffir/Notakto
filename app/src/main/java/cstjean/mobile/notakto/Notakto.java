@@ -53,13 +53,14 @@ public class Notakto {
      * Pour passé d'un joueur à l'autre.
      * @param joueur pour indiquer le tour des joueur.
      */
-    public static void joueurSuivant(int joueur){
+    public static int joueurSuivant(int joueur){
         if (joueur == 1) {
             joueur += 1;
         }
         else {
             joueur += -1;
         }
+        return joueur;
     }
 
     /**

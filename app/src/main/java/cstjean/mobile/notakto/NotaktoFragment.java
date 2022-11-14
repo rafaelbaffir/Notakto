@@ -12,25 +12,23 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class NotaktoFragment extends Fragment {
     private TextView txtWinner;
     private Button btnReStart;
     private Button[] boutons = Notakto.getInstance().getBoutons();
-
-
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
-
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.notakto, container, false);
+        View view = inflater.inflate(R.layout.notaktotemp, container, false);
         boutons[0] = (view.findViewById(R.id.btn_1));
         boutons[1] = (view.findViewById(R.id.btn_2));
         boutons[2] = (view.findViewById(R.id.btn_3));
@@ -44,10 +42,8 @@ public class NotaktoFragment extends Fragment {
         btnReStart = view.findViewById(R.id.btn_restart);
         txtWinner = view.findViewById(R.id.txt_winner);
 
-
-        int joueur = Notakto.getInstance().getJoueur();
+        AtomicInteger joueur = new AtomicInteger(Notakto.getInstance().getJoueur());
         boolean partieTerminer = Notakto.getInstance().isPartieTerminer();
-
 
         txtWinner.setText("Joueur " + joueur);
         if (!partieTerminer) {
@@ -55,7 +51,7 @@ public class NotaktoFragment extends Fragment {
             for (int i = 0; i <= 8; i++) {
                 int finalI = i;
                 boutons[i].setOnClickListener(v -> {
-                    Notakto.joueurSuivant(joueur);
+                    joueur.set(Notakto.joueurSuivant(joueur.get()));
                     boutons[finalI].setText("X");
                     txtWinner.setText("Joueur " + joueur);
 
