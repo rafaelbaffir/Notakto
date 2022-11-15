@@ -3,7 +3,6 @@ package cstjean.mobile.notakto;
 
 
 
-import android.content.Context;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -66,40 +65,42 @@ public class Notakto {
     /**
      * regles qui indique si les conditions sont bonne pour qu'il y est un gagnant/perdant.
      * @param notakto liste de boutons qui servent de cases dans le jeu.
+     * @return
      */
-    public static void regles(Button[] notakto){
+    public static boolean regles(Button[] notakto){
         if (notakto[0].getText() == "X" && notakto[1].getText() == "X" && notakto[2].getText() == "X") {
             partieTerminer = true;
-            toast.show();
+            //toast.show();
         }
         else if (notakto[3].getText() == "X" && notakto[4].getText() == "X" && notakto[5].getText() == "X") {
             partieTerminer = true;
-            toast.show();
+            //toast.show();
         }
         else if (notakto[6].getText() == "X" && notakto[7].getText() == "X" && notakto[8].getText() == "X") {
             partieTerminer = true;
-            toast.show();
+            //toast.show();
         }
         else if (notakto[0].getText() == "X" && notakto[3].getText() == "X" && notakto[6].getText() == "X") {
             partieTerminer = true;
-            toast.show();
+            //toast.show();
         }
         else if (notakto[1].getText() == "X" && notakto[4].getText() == "X" && notakto[7].getText() == "X") {
             partieTerminer = true;
-            toast.show();
+            //toast.show();
         }
         else if (notakto[2].getText() == "X" && notakto[5].getText() == "X" && notakto[8].getText() == "X") {
             partieTerminer = true;
-            toast.show();
+            //toast.show();
         }
         else if (notakto[0].getText() == "X" && notakto[4].getText() == "X" && notakto[8].getText() == "X") {
             partieTerminer = true;
-            toast.show();
+            //toast.show();
         }
         else if (notakto[2].getText() == "X" && notakto[4].getText() == "X" && notakto[6].getText() == "X") {
             partieTerminer = true;
-            toast.show();
+            //toast.show();
         }
+        return partieTerminer;
     }
 }
 

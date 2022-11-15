@@ -3,15 +3,19 @@ package cstjean.mobile.notakto;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class NotaktoFragment extends Fragment {
@@ -22,6 +26,7 @@ public class NotaktoFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
@@ -43,10 +48,10 @@ public class NotaktoFragment extends Fragment {
         txtWinner = view.findViewById(R.id.txt_winner);
 
         AtomicInteger joueur = new AtomicInteger(Notakto.getInstance().getJoueur());
-        boolean partieTerminer = Notakto.getInstance().isPartieTerminer();
+        AtomicBoolean partieTerminer = new AtomicBoolean(Notakto.isPartieTerminer());
 
         txtWinner.setText("Joueur " + joueur);
-        if (!partieTerminer) {
+        if (!partieTerminer.get()) {
 
             for (int i = 0; i <= 8; i++) {
                 int finalI = i;
@@ -54,9 +59,16 @@ public class NotaktoFragment extends Fragment {
                     joueur.set(Notakto.joueurSuivant(joueur.get()));
                     boutons[finalI].setText("X");
                     txtWinner.setText("Joueur " + joueur);
+                    Toast toast = Toast.makeText(getActivity(), "Winner is Joueur" + joueur, Toast.LENGTH_SHORT);
 
-                    Notakto.regles(boutons);
-                    //Toast toast = Toast.makeText(getApplicationContext(), "Winner is Joueur" + joueur, Toast.LENGTH_SHORT);
+                    //partieTerminer.set(Notakto.regles(boutons));
+                    if(Notakto.regles(boutons)){
+                       //txtWinner.setText( "Winner is Joueur" + joueur);
+                        toast.show();
+                    }
+
+
+
                 });
 
             }
