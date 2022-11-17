@@ -12,10 +12,10 @@ import android.widget.Toast;
 public class Notakto {
     private static Notakto instance = null;
 
-    public static Button[] boutons;
-    static boolean partieTerminer;
-    static int joueur;
-    static Toast toast;
+    private static Button[] boutons;
+    private boolean partieTerminer;
+    private int joueur = 1;
+    private final Toast toast;
 
     /**
      * Constructeur de Notakto.
@@ -25,8 +25,8 @@ public class Notakto {
      */
     private Notakto(Button[] boutons, boolean partieTerminer, int joueur, Toast toast){
         this.boutons = new Button[9];
-        this.partieTerminer = false;
-        this.joueur = 1;
+        this.partieTerminer = partieTerminer;
+        this.joueur = joueur;
         this.toast = toast;
     }
 
@@ -65,6 +65,7 @@ public class Notakto {
     /**
      * regles qui indique si les conditions sont bonne pour qu'il y est un gagnant/perdant.
      * @param notakto liste de boutons qui servent de cases dans le jeu.
+     * @param partieTerminer
      * @return
      */
     public static boolean regles(Button[] notakto){

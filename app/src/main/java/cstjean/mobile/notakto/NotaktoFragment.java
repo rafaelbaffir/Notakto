@@ -66,24 +66,17 @@ public class NotaktoFragment extends Fragment {
                        //txtWinner.setText( "Winner is Joueur" + joueur);
                         toast.show();
                     }
-
-
-
                 });
-
             }
         }
 
-        Intent intent = requireActivity().getIntent();
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK
-                | Intent.FLAG_ACTIVITY_NO_ANIMATION);
-
         btnReStart.setOnClickListener(v -> {
-            requireActivity().overridePendingTransition(0, 0);
-            requireActivity().finish();
-
-            requireActivity().overridePendingTransition(0, 0);
-            startActivity(intent);
+            for (int i = 0; i <= 8; i++) {
+                int finalI = i;
+                boutons[finalI].setText(null);
+            }
+            partieTerminer.set(false);
+            joueur.set(1);
         });
         return view;
     }
