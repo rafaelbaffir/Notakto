@@ -21,12 +21,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class NotaktoFragment extends Fragment {
     private TextView txtWinner;
     private Button btnReStart;
-    private Button[] boutons = Notakto.getInstance().getBoutons();
+    private Notakto jeu;
+    private final char[] notakto = Notakto.getInstance().getBoutons();
+    private final Button[] boutons = new Button[9];
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
@@ -48,7 +49,7 @@ public class NotaktoFragment extends Fragment {
         txtWinner = view.findViewById(R.id.txt_winner);
 
         AtomicInteger joueur = new AtomicInteger(Notakto.getInstance().getJoueur());
-        AtomicBoolean partieTerminer = new AtomicBoolean(Notakto.isPartieTerminer());
+        AtomicBoolean partieTerminer = new AtomicBoolean(jeu.isPartieTerminer());
 
         txtWinner.setText("Joueur " + joueur);
         if (!partieTerminer.get()) {
@@ -56,13 +57,14 @@ public class NotaktoFragment extends Fragment {
             for (int i = 0; i <= 8; i++) {
                 int finalI = i;
                 boutons[i].setOnClickListener(v -> {
-                    joueur.set(Notakto.joueurSuivant(joueur.get()));
+                    joueur.set(jeu.joueurSuivant(joueur.get()));
                     boutons[finalI].setText("X");
+                    notakto[finalI] = 'X';
                     txtWinner.setText("Joueur " + joueur);
                     Toast toast = Toast.makeText(getActivity(), "Winner is Joueur" + joueur, Toast.LENGTH_SHORT);
 
                     //partieTerminer.set(Notakto.regles(boutons));
-                    if(Notakto.regles(boutons)){
+                    if(jeu.regles()){
                        //txtWinner.setText( "Winner is Joueur" + joueur);
                         toast.show();
                     }

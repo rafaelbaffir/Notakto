@@ -12,36 +12,28 @@ import android.widget.Toast;
 public class Notakto {
     private static Notakto instance = null;
 
-    private static Button[] boutons;
+    private char[] notakto;
     private boolean partieTerminer;
     private int joueur = 1;
-    private final Toast toast;
 
     /**
      * Constructeur de Notakto.
-     * @param boutons liste de boutons qui servent de cases dans le jeu.
-     * @param partieTerminer boul qui determine si la partie est fini.
-     * @param joueur pour indiquer le tour des joueur.
      */
-    private Notakto(Button[] boutons, boolean partieTerminer, int joueur, Toast toast){
-        this.boutons = new Button[9];
-        this.partieTerminer = partieTerminer;
-        this.joueur = joueur;
-        this.toast = toast;
+    private Notakto(){
     }
 
     public static Notakto getInstance(){
         if(instance == null){
-            instance = new Notakto( boutons, partieTerminer, joueur, toast);
+            instance = new Notakto();
         }
         return instance;
     }
 
-    public Button[] getBoutons(){
-        return boutons;
+    public char[] getBoutons(){
+        return notakto;
     }
 
-    public static boolean isPartieTerminer() {
+    public boolean isPartieTerminer() {
         return partieTerminer;
     }
     public int getJoueur(){
@@ -52,7 +44,7 @@ public class Notakto {
      * Pour passé d'un joueur à l'autre.
      * @param joueur pour indiquer le tour des joueur.
      */
-    public static int joueurSuivant(int joueur){
+    public int joueurSuivant(int joueur){
         if (joueur == 1) {
             joueur += 1;
         }
@@ -64,40 +56,38 @@ public class Notakto {
 
     /**
      * regles qui indique si les conditions sont bonne pour qu'il y est un gagnant/perdant.
-     * @param notakto liste de boutons qui servent de cases dans le jeu.
-     * @param partieTerminer
      * @return
      */
-    public static boolean regles(Button[] notakto){
-        if (notakto[0].getText() == "X" && notakto[1].getText() == "X" && notakto[2].getText() == "X") {
+    public boolean regles(){
+        if (notakto[0] == 'X' && notakto[1] == 'X' && notakto[2] == 'X') {
             partieTerminer = true;
             //toast.show();
         }
-        else if (notakto[3].getText() == "X" && notakto[4].getText() == "X" && notakto[5].getText() == "X") {
+        else if (notakto[3] == 'X' && notakto[4] == 'X' && notakto[5] == 'X') {
             partieTerminer = true;
             //toast.show();
         }
-        else if (notakto[6].getText() == "X" && notakto[7].getText() == "X" && notakto[8].getText() == "X") {
+        else if (notakto[6] == 'X' && notakto[7] == 'X' && notakto[8] == 'X') {
             partieTerminer = true;
             //toast.show();
         }
-        else if (notakto[0].getText() == "X" && notakto[3].getText() == "X" && notakto[6].getText() == "X") {
+        else if (notakto[0] == 'X' && notakto[3] == 'X' && notakto[6] == 'X') {
             partieTerminer = true;
             //toast.show();
         }
-        else if (notakto[1].getText() == "X" && notakto[4].getText() == "X" && notakto[7].getText() == "X") {
+        else if (notakto[1] == 'X' && notakto[4] == 'X' && notakto[7] == 'X') {
             partieTerminer = true;
             //toast.show();
         }
-        else if (notakto[2].getText() == "X" && notakto[5].getText() == "X" && notakto[8].getText() == "X") {
+        else if (notakto[2] == 'X' && notakto[5] == 'X' && notakto[8] == 'X') {
             partieTerminer = true;
             //toast.show();
         }
-        else if (notakto[0].getText() == "X" && notakto[4].getText() == "X" && notakto[8].getText() == "X") {
+        else if (notakto[0] == 'X' && notakto[4] == 'X' && notakto[8] == 'X') {
             partieTerminer = true;
             //toast.show();
         }
-        else if (notakto[2].getText() == "X" && notakto[4].getText() == "X" && notakto[6].getText() == "X") {
+        else if (notakto[2] == 'X' && notakto[4] == 'X' && notakto[6] == 'X') {
             partieTerminer = true;
             //toast.show();
         }
